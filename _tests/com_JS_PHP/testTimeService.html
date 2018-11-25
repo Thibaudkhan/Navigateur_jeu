@@ -1,0 +1,58 @@
+<html>
+    <body>
+
+        <h1>Asynchronous communication test between Client (JS) and Server (PHP)</h2>
+        <h2 id="myDate">date_du_jour_1</h1>
+        
+        <h2 id="canvaTitle">Title</h2>
+        <canvas id="myCanvas" witdh="1" height="300">
+            This site does not handle canvas !
+        </canvas>
+        
+        <h2>End of test</h2>
+        
+        <script>
+            
+            function updateElements() {
+                var testDate    = document.getElementById('myDate');
+                var testCanvas  = document.getElementById('myCanvas');
+                var testContext = testCanvas.getContext('2d');
+                var testTitle   = document.getElementById('canvaTitle');
+                var url     = "./timeService.php"; 
+                fetch(url)
+                .then(
+                    function(response){
+                        response.text()
+                        .then(
+                            function(jsonText){
+                                jsonObj = JSON.parse(jsonText);
+                                testDate.textContent = jsonObj.date;
+                                testDate.style.color = jsonObj.color;
+
+                                testCanvas.width  = 10;
+                                testCanvas.height = 300;                                
+                                var h = (testCanvas.height * (100-jsonObj.percent))/100;
+                                
+                                testTitle.textContent = 'Building in progress ('+ jsonObj.percent +'%)'
+                                
+                                testContext.clearRect(0, 0, testCanvas.width, testCanvas.height);
+                                testContext.fillStyle = jsonObj.percColor;
+                                testContext.fillRect(0,h,testCanvas.width,testCanvas.height-h);
+                                
+                                updateLoop();
+                            }
+                        );
+                    }
+                );
+            }
+            
+            function updateLoop() {
+                setTimeout('updateElements()', 1000);
+            }
+            
+            window.onload = updateLoop();    
+            
+        </script>
+
+    </body>
+</html>
