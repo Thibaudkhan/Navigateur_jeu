@@ -24,8 +24,11 @@
 
 		// Fonction qui produit les ressources du batiment
 		// Final : ne pourra pas être redéfinie
-		final function produire(){ 
-			$this->stock[$this->materiauxProduits]+=(50*$this->niveau*$this->etatBat);
+		public function produire(){ 
+			// $this->stock[$this->materiauxProduits]+=(50*$this->niveau*$this->etatBat);
+			$this->stock[$this->materiauxProduits]+=25*$this->niveau;
+			return $this->stock;
+			// $this->setStock($this->stock);
 		}
 
 		// Set et Get les matériaux que produit le batiment :

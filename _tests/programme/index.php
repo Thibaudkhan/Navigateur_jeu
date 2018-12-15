@@ -29,6 +29,7 @@
 
 		//Construit le batiment
 		$mine->constructionDuBatiment();
+		$scierie->constructionDuBatiment();
 
 		//Affiche les ressources
 		foreach ($mine->getStock() as $key => $value) {
@@ -40,8 +41,12 @@
 		BatimentDeProduction::texte();
 
 		$_SESSION['mine'] = $mine;
+		$_SESSION['scierie'] = $scierie;
 		
 	?>
+
+<div id="ressources"></div>
+
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="script.js"></script>
 </body>

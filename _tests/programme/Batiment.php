@@ -35,7 +35,7 @@
 
 		//Fonction statique
 		public static function texte(){
-			self::phrase();
+			static::phrase();
 		}
 		public static function phrase(){
 			echo "<br><br>Je suis un batiment ◊"; 
@@ -114,6 +114,11 @@
 			$this->niveau = $niveau;
 		}
 
+		public function setStock($stock){
+			$this->stock['Fer'] = $stock['Fer'];
+			$this->stock['Bois'] = $stock['Bois'];
+		}
+
 		//Getteurs :
 
 		//Récupère la valeur de nos petites variables
@@ -133,7 +138,7 @@
 			return $this->niveau;
 		}
 		public function getStock(){
-			return $this->stock['Fer'];
+			return $this->stock;
 		}
 		public function getMateriaux(){
 			return $this->materiaux;
